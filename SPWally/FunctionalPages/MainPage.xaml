@@ -12,7 +12,7 @@
         <TextBlock Text="Welcome To the Wally's Wonderful World Of Wallcoverings!" TextWrapping="Wrap" TextAlignment="Center" Foreground="DarkBlue" FontSize="40" FontFamily="Algerian" Width="780" Margin="10"/>
         <Button x:Name="ExistingCustomer" Content="Existing Customer" Click="ExistingCustomer_Click" Height="25" Width="105" Margin="10" />
         <Button x:Name="NewCustomer" Content="New Customer" Click="NewCustomer_Click" Height="25" Width="105" Margin="10"/>
-        <Button x:Name="LookOrder" Content="Look-up Order"  Height="25" Width="105" Margin="10"/>
-        <Button x:Name="InvLevels" Content="Inventory Levels"  Height="25" Width="105" Margin="10"/>
+        <Button x:Name="LookOrder" Content="Look-up Order" Click="LookOrder_Click" Height="25" Width="105" Margin="10"/>
+        <Button x:Name="InvLevels" Content="Inventory Levels" Click="InvLevels_Click" Height="25" Width="105" Margin="10"/>
     </StackPanel>
 </Page>

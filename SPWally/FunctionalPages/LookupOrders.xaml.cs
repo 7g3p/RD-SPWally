@@ -16,21 +16,16 @@ using System.Windows.Shapes;
 namespace SPWally.FunctionalPages
 {
     /// <summary>
-    /// Interaction logic for RefundOrder.xaml
+    /// Interaction logic for LookupOrders.xaml
     /// </summary>
-    public partial class RefundOrder : Page
+    public partial class LookupOrders : Page
     {
-        public RefundOrder()
+        public LookupOrders()
         {
             InitializeComponent();
         }
 
-        private void ConfirmRefund_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        private void Refund_Click(object sender, RoutedEventArgs e)
         {
             // Find the frame.
             Frame frame = null;
@@ -46,7 +41,7 @@ namespace SPWally.FunctionalPages
             // Change the page of the frame.
             if (frame != null)
             {
-                frame.Navigate(new MainPage());
+                frame.Navigate(new RefundOrder());
             }
             //Code Courtesy of Shmuel Zang in codeprojects.com https://www.codeproject.com/Questions/281551/frame-navigation-in-WPF
         }

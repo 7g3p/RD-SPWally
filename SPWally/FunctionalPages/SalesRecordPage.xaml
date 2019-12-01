@@ -1,0 +1,48 @@
+﻿<Page x:Class="SPWally.FunctionalPages.SalesRecordPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SPWally.FunctionalPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SalesRecordPage">
+
+    <Grid Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="50" TextWrapping="Wrap">
+            Thank you for shopping at Wally's World Sports World On Sept. 20, 2019, Sean Clarke!
+        </TextBlock>
+
+        <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" TextWrapping="Wrap" Text="Order ID: 5001"/>
+
+        <ListView Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="15">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text ="" Margin="5"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" TextWrapping="Wrap" FontWeight="Bold" Text="Subtotal = $74.65"/>
+        <TextBlock Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" TextWrapping="Wrap" FontWeight="Bold" Text="HST(13%) = $9.70"/>
+        <TextBlock Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" TextWrapping="Wrap" FontWeight="Bold" Text="Sale Total = $84.35"/>
+
+        <TextBlock Grid.Row="8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="200" TextWrapping="Wrap" FontWeight="Bold" TextDecorations="Underline" Text="PAID - Thanks you!"/>
+        <Button Grid.Row="9" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="20" Content="Return" Click="Return_Click" />
+    </Grid>
+</Page>

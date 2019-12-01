@@ -62,6 +62,12 @@
     <Compile Include="FunctionalPages\ExistingCustomer.xaml.cs">
       <DependentUpon>ExistingCustomer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FunctionalPages\InventoryLevels.xaml.cs">
+      <DependentUpon>InventoryLevels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionalPages\LookupOrders.xaml.cs">
+      <DependentUpon>LookupOrders.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FunctionalPages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -74,11 +80,22 @@
     <Compile Include="FunctionalPages\RegisterCustomer.xaml.cs">
       <DependentUpon>RegisterCustomer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FunctionalPages\SalesRecordPage.xaml.cs">
+      <DependentUpon>SalesRecordPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FunctionalPages\SearchOrder.xaml.cs">
       <DependentUpon>SearchOrder.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ViewModelValueOriented.cs" />
     <Page Include="FunctionalPages\ExistingCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FunctionalPages\InventoryLevels.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FunctionalPages\LookupOrders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -95,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FunctionalPages\RegisterCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FunctionalPages\SalesRecordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

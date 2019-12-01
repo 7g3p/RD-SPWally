@@ -16,21 +16,16 @@ using System.Windows.Shapes;
 namespace SPWally.FunctionalPages
 {
     /// <summary>
-    /// Interaction logic for RefundOrder.xaml
+    /// Interaction logic for SalesRecordPage.xaml
     /// </summary>
-    public partial class RefundOrder : Page
+    public partial class SalesRecordPage : Page
     {
-        public RefundOrder()
+        public SalesRecordPage()
         {
             InitializeComponent();
         }
 
-        private void ConfirmRefund_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        private void Return_Click(object sender, RoutedEventArgs e)
         {
             // Find the frame.
             Frame frame = null;

@@ -1,4 +1,4 @@
-﻿<Page x:Class="SPWally.FunctionalPages.PurchaseOrder"
+﻿<Page x:Class="SPWally.FunctionalPages.InventoryLevels"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:SPWally.FunctionalPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="OrderPage">
+      Title="InventoryLevels">
 
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
@@ -18,8 +18,9 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Text="View Inventory Levels"/>
         
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Text="Place an Order"/>
         <ListView Grid.Row="1" Grid.Column="0" Margin="15">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -29,15 +30,16 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="15" x:Name="Products" AlternatingRowBackground="LightGray" CanUserAddRows="False" 
-                  AutoGenerateColumns="False">
+        
+        <DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="15" x:Name="Products" AlternatingRowBackground="LightGray" CanUserAddRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
+                <DataGridTextColumn CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product ID" />
                 <DataGridTextColumn CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product Name" />
-                <DataGridTextColumn CanUserReorder="False" CanUserResize="False" Header="Quantity" />
-                <DataGridCheckBoxColumn Header="Add To Order" />
+                <DataGridTextColumn CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Wholesale Price" />
+                <DataGridTextColumn CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Stock" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="2" Grid.Column="0" Width="80" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" x:Name="PlaceOrder" Content="Confirm Order" Click="ConfirmPurchase_Click" />
-        <Button Grid.Row="2" Grid.Column="0" Width="80" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" x:Name="CancelOrder" Content="Cancel" Click="Cancel_Click" />
+
+        <Button Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="20" Content="Return" Command="{x:Static NavigationCommands.BrowseBack}"/>
     </Grid>
 </Page>
