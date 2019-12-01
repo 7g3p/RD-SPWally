@@ -10,31 +10,21 @@
 
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
-            <RowDefinition Height="75"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.ColumnSpan="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Place an Order" FontSize="30"/>
-        
-        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Product:"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Branch:"/>
-        <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Sales Price:"/>
-        <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Quantity:"/>
-
-        <ComboBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" IsEditable="False" Margin="30,0,0,0">
-        </ComboBox>
-        <ComboBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" IsEditable="False" Margin="30,0,0,0">
-        </ComboBox>
-        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0"/>
-        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0"/>
-        <Button x:Name="ConfirmPurchase" Content="Confirm Purchase" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,125,0" Click="ConfirmPurchase_Click"/>
-        <Button x:Name="Cancel" Content="Cancel" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="75,15,0,0" Click="Cancel_Click"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Text="Place an Order"/>
+        <ListBox Grid.Row="1" Grid.Column="0" Margin="15">
+            <ListBoxItem>
+                <TextBlock Text="temp"/>
+            </ListBoxItem>
+        </ListBox>
+        <DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" AlternatingRowBackground="LightGray" AutoGenerateColumns="False">
+        </DataGrid>
     </Grid>
 </Page>
