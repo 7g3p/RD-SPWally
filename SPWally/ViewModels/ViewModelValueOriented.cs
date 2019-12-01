@@ -14,15 +14,15 @@ namespace SPWally
     class ViewModelValueOriented : INotifyPropertyChanged
     {
         //Data members
-        private static string _Message;
-        public string Message
+        private static string _OrderIDSearch;
+        public string OrderIDSearch
         {
-            get { return _Message; }
+            get { return _OrderIDSearch; }
             set
             {
-                if(_Message != value)
+                if(_OrderIDSearch != value)
                 {
-                    _Message = value;
+                    _OrderIDSearch = value;
                     OnPropertyChanged();
                 }
             }
@@ -69,6 +69,16 @@ namespace SPWally
                 }
             }
         }
+
+        private static string _Customer;
+        public string Customer
+        {
+            get { return _Customer; }
+
+            set { _Customer = FirstName + " " + LastName + "; " + Phone; }
+        }
+
+
 
 
 

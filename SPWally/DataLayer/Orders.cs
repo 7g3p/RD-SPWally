@@ -11,7 +11,7 @@ namespace SPWally.DataLayer
     {
         // Data members
         public int OrderID { get; set; }
-        public int CustomerID { get; set; }
+        public Customer CustomerID { get; set; }
         public int ProductID { get; set; }
         public int BranchID { get; set; }
         public DateTime OrderDate { get; set; }
