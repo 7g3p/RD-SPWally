@@ -24,7 +24,7 @@
                 <TextBlock Text="temp"/>
             </ListBoxItem>
         </ListBox>
-        <DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" AlternatingRowBackground="LightGray" AutoGenerateColumns="False">
+        <DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" AlternatingRowBackground="LightGray" AutoGenerateColumns="False" Margin="15">
         </DataGrid>
     </Grid>
 </Page>
