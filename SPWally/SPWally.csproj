@@ -60,6 +60,7 @@
     <Compile Include="DataLayer\Customer.cs" />
     <Compile Include="DataLayer\DatabaseManipulation.cs" />
     <Compile Include="DataLayer\Orders.cs" />
+    <Compile Include="DataLayer\Products.cs" />
     <Compile Include="FunctionalPages\ExistingCustomer.xaml.cs">
       <DependentUpon>ExistingCustomer.xaml</DependentUpon>
     </Compile>
