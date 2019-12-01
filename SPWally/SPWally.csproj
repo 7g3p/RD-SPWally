@@ -58,6 +58,7 @@
     </ApplicationDefinition>
     <Compile Include="BusinessLayer\DataAccess.cs" />
     <Compile Include="DataLayer\Customer.cs" />
+    <Compile Include="DataLayer\DatabaseManipulation.cs" />
     <Compile Include="DataLayer\Orders.cs" />
     <Compile Include="FunctionalPages\ExistingCustomer.xaml.cs">
       <DependentUpon>ExistingCustomer.xaml</DependentUpon>

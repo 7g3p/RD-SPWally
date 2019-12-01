@@ -23,6 +23,12 @@ namespace SPWally.FunctionalPages
         public RegisterCustomer()
         {
             InitializeComponent();
+            Loaded += RegisterCustomer_Loaded;
+        }
+
+        private void RegisterCustomer_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = new ViewModelValueOriented();
         }
 
         private void ConfirmCust_Click(object sender, RoutedEventArgs e)

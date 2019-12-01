@@ -33,5 +33,11 @@ namespace SPWally.DataLayer
                 }
             }
         }
+        public int Phone
+        {
+            get { return Phone; }
+
+            set { Phone = value;}
+        }
     }
 }

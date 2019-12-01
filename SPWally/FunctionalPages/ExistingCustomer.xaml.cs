@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SPWally.DataLayer;
 
 namespace SPWally.FunctionalPages
 {
@@ -23,27 +24,42 @@ namespace SPWally.FunctionalPages
         public ExistingCustomer()
         {
             InitializeComponent();
+            Loaded += ExistingCustomer_Loaded;
+        }
+
+        private void ExistingCustomer_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = new ViewModelValueOriented();
         }
 
         private void ConfirmCustomer_Click(object sender, RoutedEventArgs e)
         {
-            // Find the frame.
-            Frame frame = null;
-            DependencyObject parent = VisualTreeHelper.GetParent(this);
+            var dbMani = new DatabaseManipulation();
 
-            // Cycles through to MainWindow frame
-            while (parent != null && frame == null)
+            if (dbMani.FindCustomer())
             {
-                frame = parent as Frame;
-                parent = VisualTreeHelper.GetParent(parent);
-            }
+                // Find the frame.
+                Frame frame = null;
+                DependencyObject parent = VisualTreeHelper.GetParent(this);
 
-            // Change the page of the frame.
-            if (frame != null)
-            {
-                frame.Navigate(new RefundOrder());
+                // Cycles through to MainWindow frame
+                while (parent != null && frame == null)
+                {
+                    frame = parent as Frame;
+                    parent = VisualTreeHelper.GetParent(parent);
+                }
+
+                // Change the page of the frame.
+                if (frame != null)
+                {
+                    frame.Navigate(new RefundOrder());
+                }
+                //Code Courtesy of Shmuel Zang in codeprojects.com https://www.codeproject.com/Questions/281551/frame-navigation-in-WPF
             }
-            //Code Courtesy of Shmuel Zang in codeprojects.com https://www.codeproject.com/Questions/281551/frame-navigation-in-WPF
+            else
+            {
+                MessageBox.Show("Could Not Find Specific Customer.", "Alert!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
