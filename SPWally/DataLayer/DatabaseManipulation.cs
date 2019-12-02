@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Caliburn.Micro;
 using System.Threading.Tasks;
 using SPWally.BusinessLayer;
 using MySql.Data;
@@ -190,6 +189,120 @@ namespace SPWally.DataLayer
                 }
 
                 //Close connection and return true execution completes without problems
+                conn.CloseConnection();
+                return true;
+            }
+        }
+
+        public bool GetAllBranches()
+        {
+            //Variable
+            List<Branches> allBranches = new List<Branches>();
+            Branches branch;
+            //Get Database Connection
+            var conn = DataAccess.Instance();
+            conn.ConnectToDatabase();
+
+            //Create Query string
+            string query = @"SELECT BranchID, BranchName
+                                    FROM
+                                        Branch; ";
+
+            //Create command
+            var command = new MySqlCommand(query, conn.Connection);
+
+            //Execute the command
+            MySqlDataReader reader;
+            using (reader = command.ExecuteReader())
+            {
+
+                //Check if Customer was found; if not then close connection and return false
+                if (reader.HasRows == false)
+                {
+                    conn.CloseConnection();
+                    return false;
+                }
+
+                //Read Data into variables
+                while (reader.Read())
+                {
+                    //Instantiate new Branches object
+                    branch = new Branches();
+
+                    //Fill object
+                    branch.BranchID = reader.GetInt32(0);
+                    branch.BranchName = reader.GetString(1);
+
+                    //Add object to list
+                    allBranches.Add(branch);
+                }
+
+                //Populate
+                boundData.BranchList = new BindableCollection<Branches>(allBranches);
+
+                //Close connection and return true if execution completes without problems
+                conn.CloseConnection();
+                return true;
+            }
+        }
+
+        public bool GetAllProductsInBranch()
+        {
+            //Variable
+            List<Products> allProducts = new List<Products>();
+            Products product;
+            //Get Database Connection
+            var conn = DataAccess.Instance();
+            conn.ConnectToDatabase();
+
+            //Create Query string
+            string query = @"SELECT P.ProductID, P.ProductName, P.wPrice, P.Stock
+                            FROM
+                                branchLine bl
+                                    INNER JOIN
+                                Products P ON P.ProductID = bl.ProductID
+                                    INNER JOIN
+                                branch b ON b.branchID = bl.branchID
+                            WHERE
+                                b.branchID = @currentBranchID; ";
+
+            //Create command
+            var command = new MySqlCommand(query, conn.Connection);
+
+            command.Parameters.AddWithValue("@currentBranchID", boundData.CurrentBranch.BranchID);
+
+            //Execute the command
+            MySqlDataReader reader;
+            using (reader = command.ExecuteReader())
+            {
+
+                //Check if Customer was found; if not then close connection and return false
+                if (reader.HasRows == false)
+                {
+                    conn.CloseConnection();
+                    return false;
+                }
+
+                //Read Data into variables
+                while (reader.Read())
+                {
+                    //Instantiate new Branches object
+                    product = new Products();
+
+                    //Fill object
+                    product.productId = reader.GetInt32(0);
+                    product.ProductName = reader.GetString(1);
+                    product.wPrice = reader.GetDouble(2);
+                    product.Stock = reader.GetInt32(3);
+
+                    //Add object to list
+                    allProducts.Add(product);
+                }
+
+                //Populate
+                boundData.ProductList = new BindableCollection<Products>(allProducts);
+
+                //Close connection and return true if execution completes without problems
                 conn.CloseConnection();
                 return true;
             }

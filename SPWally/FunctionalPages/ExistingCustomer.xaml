@@ -27,7 +27,8 @@
         <TextBox Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="{Binding Path=FirstName, Mode=OneWayToSource}" Height="15" Width="170" Margin="70,0,0,0"/>
         <TextBox Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="{Binding Path=LastName, Mode=OneWayToSource}" Width="170" Height="15" Margin="70,0,0,0"/>
         <TextBox Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="{Binding Path=Phone, Mode=OneWayToSource}" Width="170" Height="15" Margin="70,0,0,0"/>
-        <Button x:Name="ConfirmCustomer" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Confirm" Click="ConfirmCustomer_Click" Height="25" Width="50" Margin="0,15,15,0" />
-        <Button Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Cancel" Command="{x:Static NavigationCommands.BrowseBack}" Height="25" Width="50" Margin="15,15,0,0"/>
+        <Button x:Name="Purchase" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Purchase" Click="Purchase_Click" Height="25" Width="50" Margin="0,15,50,0" />
+        <Button x:Name="Refund" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Refund" Click="Refund_Click" Height="25" Width="50" Margin="0,15,0,0" />
+        <Button Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Cancel" Command="{x:Static NavigationCommands.BrowseBack}" Height="25" Width="50" Margin="50,15,0,0"/>
     </Grid>
 </Page>

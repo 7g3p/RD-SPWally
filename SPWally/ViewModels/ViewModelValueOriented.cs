@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Caliburn.Micro;
 using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Data;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using SPWally.DataLayer;
@@ -86,6 +81,43 @@ namespace SPWally
             }
         }
 
+        private static BindableCollection<Branches> _Branches;
+        public BindableCollection<Branches> BranchList
+        {
+            get { return _Branches; }
+            set
+            {
+                _Branches = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private static Branches _CurrentBranch;
+        public Branches CurrentBranch
+        {
+            get { return _CurrentBranch; }
+            set
+            {
+                if (value.BranchID > 0)
+                {
+                    _CurrentBranch = value;
+                    OnPropertyChanged();
+                    //OnCurrentBranchSelected();
+                }
+            }
+        }
+
+        private static BindableCollection<Products> _Products;
+        public BindableCollection<Products> ProductList
+        {
+            get { return _Products; }
+            set
+            {
+                _Products = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ViewModelValueOriented()
         {
             if (_Order == null)
@@ -93,7 +125,11 @@ namespace SPWally
 
         }
 
-
+        public event EventHandler CurrentBranchSelected;
+        private void OnCurrentBranchSelected()
+        {
+            CurrentBranchSelected?.Invoke(this, new EventArgs());
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)

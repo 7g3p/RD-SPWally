@@ -20,23 +20,26 @@
         </Grid.ColumnDefinitions>
         
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Text="Place an Order"/>
-        <ListView Grid.Row="1" Grid.Column="0" Margin="15">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text ="" Margin="5"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="15" x:Name="Products" AlternatingRowBackground="LightGray" CanUserAddRows="False" 
-                  AutoGenerateColumns="False">
+        <DataGrid Grid.Row="1" Grid.Column="0" Margin="15" AlternatingRowBackground="LightGray" SelectedItem="{Binding Path=CurrentBranch, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" AutoGenerateColumns="False" x:Name="BranchList" ItemsSource="{Binding Path=BranchList, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product Name" />
-                <DataGridTextColumn CanUserReorder="False" CanUserResize="False" Header="Quantity" />
-                <DataGridCheckBoxColumn Header="Add To Order" />
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Branch ID" Binding="{Binding Path=BranchID, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Branch Name" Binding="{Binding Path=BranchName, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="15" AlternatingRowBackground="LightGray" CanUserAddRows="False" AutoGenerateColumns="False" x:Name="ProductList" ItemsSource="{Binding Path=ProductList, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product ID" Binding="{Binding Path=ProductID, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product Name" Binding="{Binding Path=ProductName, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--<DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="15" AlternatingRowBackground="LightGray" CanUserAddRows="False" CanUserResizeRows="False" AutoGenerateColumns="False" x:Name="ProductList" ItemsSource="{Binding Path=ProductList, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product ID" Binding="{Binding Path=ProductID, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product Name" Binding="{Binding Path=ProductName, UpdateSourceTrigger=PropertyChanged}" />
+                --><!--<DataGridCheckBoxColumn Width="*" CanUserReorder="False" CanUserResize="False" Header="Add To Order" />--><!--
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" Header="Quantity" Binding="{Binding Path=Stock, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataGrid.Columns>
+        </DataGrid>-->
         <Button Grid.Row="2" Grid.Column="0" Width="80" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" x:Name="PlaceOrder" Content="Confirm Order" Click="ConfirmPurchase_Click" />
         <Button Grid.Row="2" Grid.Column="0" Width="80" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" x:Name="CancelOrder" Content="Cancel" Click="Cancel_Click" />
     </Grid>
