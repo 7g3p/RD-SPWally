@@ -175,6 +175,7 @@ namespace SPWally.DataLayer
                     boundData.Order.Customer.CustomerID = reader.GetInt32(1);
                     boundData.Order.Customer.FirstName = reader.GetString(2);
                     boundData.Order.Customer.LastName = reader.GetString(3);
+                    boundData.Order.Customer.FullName = reader.GetString(2) + " " + reader.GetString(3);
                     boundData.Order.Customer.Phone = reader.GetInt64(4);
                     boundData.Order.Product.productId = reader.GetInt32(5);
                     boundData.Order.Product.ProductName = reader.GetString(6);

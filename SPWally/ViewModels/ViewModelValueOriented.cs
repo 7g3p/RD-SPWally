@@ -25,6 +25,7 @@ namespace SPWally
                 if(_FirstName != value && Regex.IsMatch(value, @"^[a-zA-Z]+$"))
                 {
                     _FirstName = value;
+                    OnPropertyChanged("FirstName");
                 }
             }
         }
@@ -39,6 +40,7 @@ namespace SPWally
                 if (_LastName != value && Regex.IsMatch(value, @"^[a-zA-Z]+$"))
                 {
                     _LastName = value;
+                    OnPropertyChanged("LastName");
                 }
             }
         }
@@ -53,22 +55,23 @@ namespace SPWally
                 if (_Phone != value)
                 {
                     _Phone = value;
+                    OnPropertyChanged("Phone");
                 }
             }
         }
 
-        private static Orders _Order;
-        public Orders Order 
-        { 
-            get { return _Order; } 
-            set 
+        public static Orders _Order;
+        public Orders Order
+        {
+            get { return _Order; }
+            set
             {
-                if (_Order == null)
-                {
-                    _Order = value;
-                }
-            } 
+                _Order = value;
+                OnPropertyChanged();
+                _Order.PropertyChanged += SubscribeToPropertyChanged;
+            }
         }
+
         private static string _OrderIDSearch;
         public string OrderIDSearch
         {
@@ -78,13 +81,16 @@ namespace SPWally
                 if (_OrderIDSearch != value)
                 {
                     _OrderIDSearch = value;
+                    OnPropertyChanged();
                 }
             }
         }
 
         public ViewModelValueOriented()
         {
-            Order = new Orders();
+            if (_Order == null)
+                Order = new Orders();
+
         }
 
 
@@ -94,6 +100,11 @@ namespace SPWally
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        
+
+        private void SubscribeToPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged();
+        }
+
     }
 }
