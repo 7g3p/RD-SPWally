@@ -57,7 +57,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BusinessLayer\DataAccess.cs" />
-    <Compile Include="DataLayer\Customer.cs" />
+    <Compile Include="DataLayer\Branches.cs" />
+    <Compile Include="DataLayer\Customers.cs" />
     <Compile Include="DataLayer\DatabaseManipulation.cs" />
     <Compile Include="DataLayer\Orders.cs" />
     <Compile Include="DataLayer\Products.cs" />

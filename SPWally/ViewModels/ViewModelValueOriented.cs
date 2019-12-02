@@ -8,26 +8,13 @@ using System.Windows;
 using System.Windows.Data;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using SPWally.DataLayer;
 
 namespace SPWally
 {
     class ViewModelValueOriented : INotifyPropertyChanged
     {
         //Data members
-        private static string _OrderIDSearch;
-        public string OrderIDSearch
-        {
-            get { return _OrderIDSearch; }
-            set
-            {
-                if(_OrderIDSearch != value)
-                {
-                    _OrderIDSearch = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         private static string _FirstName;
         public string FirstName
         {
@@ -70,15 +57,35 @@ namespace SPWally
             }
         }
 
-        private static string _Customer;
-        public string Customer
+        private static Orders _Order;
+        public Orders Order 
+        { 
+            get { return _Order; } 
+            set 
+            {
+                if (_Order == null)
+                {
+                    _Order = value;
+                }
+            } 
+        }
+        private static string _OrderIDSearch;
+        public string OrderIDSearch
         {
-            get { return _Customer; }
-
-            set { _Customer = FirstName + " " + LastName + "; " + Phone; }
+            get { return _OrderIDSearch; }
+            set
+            {
+                if (_OrderIDSearch != value)
+                {
+                    _OrderIDSearch = value;
+                }
+            }
         }
 
-
+        public ViewModelValueOriented()
+        {
+            Order = new Orders();
+        }
 
 
 

@@ -18,6 +18,7 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
@@ -29,23 +30,25 @@
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Text="Search For Order" />
         
         <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,335,0" Text="OrderID: " />
-        <TextBox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="300" Margin="0,0,20,0" Text="{Binding Path=OrderIDSearch, Mode=OneWayToSource}" />
+        <TextBox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="300" Margin="0,0,20,0" Text="{Binding Path=OrderID, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
         
-        <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40" Height="20" Margin="10,0,0,0" Content="Find" />
+        <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40" Height="20" Margin="10,0,0,0" Content="Find" Click="Find_Click" />
         <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Height="20" Margin="70,0,0,0" Content="Refund" Click="Refund_Click" />
 
         <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="OrderID:"/>
-        <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Product:"/>
-        <TextBlock Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Branch:"/>
-        <TextBlock Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Sales Price:"/>
-        <TextBlock Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Quantity:"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Customer:"/>
+        <TextBlock Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Product:"/>
+        <TextBlock Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Branch:"/>
+        <TextBlock Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Sales Price:"/>
+        <TextBlock Grid.Row="8" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Quantity:"/>
 
-        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0"/>
-        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0"/>
-        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0"/>
-        <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0"/>
-        <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0" Text="{Binding Path=Order.OrderID}"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0" Text="{Binding Path=Order.Customer.FullName}"/>
+        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0" Text="{Binding Path=Order.Product.ProductName}"/>
+        <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0" Text="{Binding Path=Order.Branch.BranchName}"/>
+        <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0" Text="{Binding Path=Order.SalesPrice}"/>
+        <TextBlock Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0" Text="{Binding Path=Order.Stocks}"/>
 
-        <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="25" Content="Cancel" Command="{x:Static NavigationCommands.BrowseBack}" />
+        <Button Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="25" Content="Cancel" Command="{x:Static NavigationCommands.BrowseBack}" />
     </Grid>
 </Page>

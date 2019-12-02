@@ -131,5 +131,68 @@ namespace SPWally.DataLayer
             return retCode;
         }
 
+        public bool LoadOrder()
+        {
+            //Get Database Connection
+            var conn = DataAccess.Instance();
+            conn.ConnectToDatabase();
+
+            //Create Query string
+            string query = @"SELECT O.OrderID, C.CustomerID, C.FirstName, C.LastName, C.Phone, P.productID, P.ProductName, p.wPrice, P.Stock, B.BranchID, B.BranchName, O.OrderDate, O.sPrice, O.Status, O.ItemQuantity
+                                    FROM
+                                        Orders O
+                                    INNER JOIN
+                                        Customers C ON C.CustomerID = O.CustomerID
+                                    INNER JOIN
+                                        Products P ON P.ProductID = O.ProductID
+                                    INNER JOIN
+                                        Branch B ON B.BranchID = O.BranchID
+                                    WHERE
+                                        O.OrderID = @OrderIDSearch; ";
+
+            //Create command
+            var command = new MySqlCommand(query, conn.Connection);
+
+            //Add variabled values
+            command.Parameters.AddWithValue("@OrderIDSearch", boundData.OrderIDSearch);
+
+            //Execute the command
+            MySqlDataReader reader;
+            using (reader = command.ExecuteReader())
+            {
+
+                //Check if Customer was found; if not then close connection and return false
+                if (reader.HasRows == false)
+                {
+                    conn.CloseConnection();
+                    return false;
+                }
+
+                //Read Data into variables
+                while (reader.Read())
+                {
+                    boundData.Order.OrderID = reader.GetInt32(0);
+                    boundData.Order.Customer.CustomerID = reader.GetInt32(1);
+                    boundData.Order.Customer.FirstName = reader.GetString(2);
+                    boundData.Order.Customer.LastName = reader.GetString(3);
+                    boundData.Order.Customer.Phone = reader.GetInt64(4);
+                    boundData.Order.Product.productId = reader.GetInt32(5);
+                    boundData.Order.Product.ProductName = reader.GetString(6);
+                    boundData.Order.Product.wPrice = reader.GetDouble(7);
+                    boundData.Order.Product.Stock = reader.GetInt32(8);
+                    boundData.Order.Branch.BranchID = reader.GetInt32(9);
+                    boundData.Order.Branch.BranchName = reader.GetString(10);
+                    boundData.Order.OrderDate = reader.GetDateTime(11);
+                    boundData.Order.SalesPrice = reader.GetDouble(12);
+                    boundData.Order.Status = reader.GetString(13);
+                    boundData.Order.Quantity = reader.GetInt32(14);
+                }
+
+                //Close connection and return true execution completes without problems
+                conn.CloseConnection();
+                return true;
+            }
+        }
+
     }
 }

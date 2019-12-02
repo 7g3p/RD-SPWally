@@ -10,26 +10,28 @@ namespace SPWally.DataLayer
     {
         public int productId { get; set; }
         public string ProductName { get; set; }
+        private double _wPrice;
         public double wPrice {
-            get { return wPrice; }
+            get { return _wPrice; }
 
             set
             {
                 if(value > 0.00)
                 {
-                    wPrice = value;
+                    _wPrice = value;
                 }
             }
         }
+        private int _Stock;
         public int Stock
         {
-            get { return Stock; }
+            get { return _Stock; }
 
             set
             {
                 if(value >= 0)
                 {
-                    Stock = value;
+                    _Stock = value;
                 }
             }
         }

@@ -11,47 +11,55 @@ namespace SPWally.DataLayer
     {
         // Data members
         public int OrderID { get; set; }
-        public Customer CustomerID { get; set; }
-        public int ProductID { get; set; }
-        public int BranchID { get; set; }
+        public Customers Customer { get; set; }
+        public Products Product { get; set; }
+        public Branches Branch { get; set; }
         public DateTime OrderDate { get; set; }
+        private double _SalesPrice;
         public double SalesPrice { 
-            get { return SalesPrice; }
+            get { return _SalesPrice; }
             
             set
             {
-                if(value > 0.00)
+                if(value >= 0.00)
                 {
-                    SalesPrice = value;
+                    _SalesPrice = value;
                 }
             } 
         }
+        private int _Quantity;
         public int Quantity
         {
-            get { return Quantity; }
+            get { return _Quantity; }
 
             set
             {
-                if(value > 0 && !(value > Quantity))
+                if(value > 0 && !(value > _Quantity))
                 {
-                    Quantity = value;
+                    _Quantity = value;
                 }
             }
         }
-        private string Status
+        private string _Status;
+        public string Status
         {
-            get { return Status; }
+            get { return _Status; }
 
             set
             {
                 //Checks if the value to be set is valid before setting
                 if (value == "PAID" || value == "RFND")
                 {
-                    Status = value;
+                    _Status = value;
                 }
             }
         }
-        public bool OrderPaid { get; set; }
-        public bool OrderRefunded { get; set; }
+
+        public Orders()
+        {
+            Customer = new Customers();
+            Product = new Products();
+            Branch = new Branches();
+        }
     }
 }

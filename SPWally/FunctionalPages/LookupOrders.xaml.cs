@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SPWally.DataLayer;
 
 namespace SPWally.FunctionalPages
 {
@@ -23,6 +24,12 @@ namespace SPWally.FunctionalPages
         public LookupOrders()
         {
             InitializeComponent();
+            Loaded += LookupOrders_Loaded;
+        }
+
+        private void LookupOrders_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = new ViewModelValueOriented();
         }
 
         private void Refund_Click(object sender, RoutedEventArgs e)
@@ -44,6 +51,16 @@ namespace SPWally.FunctionalPages
                 frame.Navigate(new RefundOrder());
             }
             //Code Courtesy of Shmuel Zang in codeprojects.com https://www.codeproject.com/Questions/281551/frame-navigation-in-WPF
+        }
+
+        private void Find_Click(object sender, RoutedEventArgs e)
+        {
+            DatabaseManipulation dataMani = new DatabaseManipulation();
+
+            if(!dataMani.LoadOrder())
+            { 
+                MessageBox.Show("Could Not Find the Specified Order.", "Alert!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

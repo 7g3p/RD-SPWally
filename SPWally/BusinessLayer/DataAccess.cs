@@ -10,7 +10,7 @@ namespace SPWally.BusinessLayer
 {
     class DataAccess
     {
-        const string connectionString = "Server=127.0.0.1; database=wallysworld; UID=root; password=Samsung1027588612";
+        const string connectionString = "Server=127.0.0.1; database=wallysworld; UID=root; password=Conestoga1";
         private MySqlConnection _Connection = null;
         public MySqlConnection Connection 
         {

@@ -6,38 +6,45 @@ using System.Threading.Tasks;
 
 namespace SPWally.DataLayer
 {
-    class Customer
+    class Customers
     {
         public int CustomerID { get; set; }
+        private string _FirstName;
         public string FirstName
         {
-            get { return FirstName; }
+            get { return _FirstName; }
 
             set
             {
                 if (Regex.IsMatch(value, @"^[a-zA-Z]+$"))
                 {
-                    FirstName = value;
+                    _FirstName = value;
                 }
             }
         }
+        private string _LastName;
         public string LastName
         {
-            get { return LastName; }
+            get { return _LastName; }
 
             set
             {
                 if (Regex.IsMatch(value, @"^[a-zA-Z]+$"))
                 {
-                    LastName = value;
+                    _LastName = value;
                 }
             }
         }
-        public int Phone
+        private string _FullName;
+        public string FullName
         {
-            get { return Phone; }
+            get { return _FullName; }
 
-            set { Phone = value;}
+            set
+            {
+                _FullName = FirstName + " " + LastName;
+            }
         }
+        public long Phone{ get; set ;}
     }
 }
