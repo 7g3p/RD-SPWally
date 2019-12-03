@@ -98,9 +98,6 @@
     <Compile Include="FunctionalPages\SalesRecordPage.xaml.cs">
       <DependentUpon>SalesRecordPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FunctionalPages\SearchOrder.xaml.cs">
-      <DependentUpon>SearchOrder.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\ViewModelValueOriented.cs" />
     <Page Include="FunctionalPages\ExistingCustomer.xaml">
       <SubType>Designer</SubType>
@@ -131,10 +128,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FunctionalPages\SalesRecordPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="FunctionalPages\SearchOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
