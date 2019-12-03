@@ -71,7 +71,35 @@ namespace SPWally.FunctionalPages
 
         private void ConfirmPurchase_Click(object sender, RoutedEventArgs e)
         {
-            
+            DatabaseManipulation dataMani = new DatabaseManipulation();
+            vmvo.OrderList = orderList;
+
+            if(dataMani.AddOrdersFromList() == true)
+            {
+                vmvo.OnPropertyChanged();
+
+                // Find the frame.
+                Frame frame = null;
+                DependencyObject parent = VisualTreeHelper.GetParent(this);
+
+                // Cycles through to MainWindow frame
+                while (parent != null && frame == null)
+                {
+                    frame = parent as Frame;
+                    parent = VisualTreeHelper.GetParent(parent);
+                }
+
+                // Change the page of the frame.
+                if (frame != null)
+                {
+                    frame.Navigate(new SalesRecordPage());
+                }
+                //Code Courtesy of Shmuel Zang in codeprojects.com https://www.codeproject.com/Questions/281551/frame-navigation-in-WPF
+            }
+            else
+            {
+                MessageBox.Show("Could Not Complete All Orders.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

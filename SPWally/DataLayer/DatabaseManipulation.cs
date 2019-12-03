@@ -311,5 +311,70 @@ namespace SPWally.DataLayer
             }
         }
 
+        public bool AddOrdersFromList()
+        {
+            //Get Database Connection
+            List<Orders> orderList = boundData.OrderList;
+            var conn = DataAccess.Instance();
+            conn.ConnectToDatabase();
+
+            foreach (Orders ord in orderList)
+            {
+                //Create Query string
+                string query = @"INSERT INTO Orders(OrderID, CustomerID, ProductID, BranchID, OrderDate, sPrice, Status, ItemQuantity) VALUES 
+                                    (@OrderID, @CustomerID, @ProductID, @BranchID, @OrderDate, @sPrice, @Status, @ItemQuantity); ";
+
+                //Create command
+                var command = new MySqlCommand(query, conn.Connection);
+
+                //Add variabled values
+                command.Parameters.AddWithValue("@OrderID", ord.OrderID);
+                command.Parameters.AddWithValue("@CustomerID", ord.Customer.CustomerID);
+                command.Parameters.AddWithValue("@ProductID", ord.Product.productId);
+                command.Parameters.AddWithValue("@BranchID", ord.Branch.BranchID);
+                command.Parameters.AddWithValue("@OrderDate", ord.OrderDate);
+                command.Parameters.AddWithValue("@sPrice", ord.SalesPrice);
+                command.Parameters.AddWithValue("@Status", ord.Status);
+                command.Parameters.AddWithValue("@ItemQuantity", ord.Quantity);
+
+                //Check if the command executed Properly
+                if (0 == command.ExecuteNonQuery())
+                {
+                    conn.CloseConnection();
+                    return false;
+                }
+
+                command.CommandText = @"UPDATE Products P
+                                                INNER JOIN
+                                            branchLine bl ON bl.ProductID = P.ProductID 
+                                        SET 
+                                            P.Stock = @NewStock
+                                        WHERE
+                                            bl.BranchID = @BranchID AND P.ProductID = @ProductID; ";
+
+                if (ord.Status == "PAID")
+                {
+                    command.Parameters.AddWithValue("@NewStock", (ord.Product.Stock - ord.Quantity));
+                }
+                else
+                {
+                    command.Parameters.AddWithValue("@NewStock", (ord.Product.Stock + ord.Quantity));
+                }
+                command.Parameters.AddWithValue("@BranchID", ord.Branch.BranchID);
+                command.Parameters.AddWithValue("@ProductID", ord.Product.productId);
+
+                //Check if the command executed Properly
+                if (0 == command.ExecuteNonQuery())
+                {
+                    conn.CloseConnection();
+                    return false;
+                }
+            }
+
+            //Close connection and return true execution completes without problems
+            conn.CloseConnection();
+            return true;
+        }
+
     }
 }

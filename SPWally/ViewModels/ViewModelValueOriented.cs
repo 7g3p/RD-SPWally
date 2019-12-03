@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using SPWally.DataLayer;
+using System.Collections.Generic;
 
 namespace SPWally
 {
@@ -149,6 +150,16 @@ namespace SPWally
             {
                 _CurrentCustomer = value;
                 OnPropertyChanged();
+            }
+        }
+
+        private List<Orders> _OrderList;
+        public List<Orders> OrderList
+        {
+            get { return _OrderList; }
+            set
+            {
+                _OrderList = value;
             }
         }
 
