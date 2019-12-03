@@ -30,11 +30,11 @@
         <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Sales Price:"/>
         <TextBlock Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" Text="Quantity:"/>
 
-        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0"/>
-        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0"/>
-        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0"/>
-        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0" Text="{Binding Path=OrderIDSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0" Text="{Binding Path=Order.Product.ProductName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0" Text="{Binding Path=Order.Branch.BranchName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0" Text="{Binding Path=Order.SalesPrice, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Margin="30,0,0,0" Text="{Binding Path=ProductQuantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         
         <Button x:Name="ConfirmRefund" Content="Confirm Refund" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,125,0" Click="ConfirmRefund_Click"/>
         <Button x:Name="Cancel" Content="Cancel" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="75,15,0,0" Click="Cancel_Click"/>

@@ -316,10 +316,11 @@ namespace SPWally.DataLayer
             //Get Database Connection
             List<Orders> orderList = boundData.OrderList;
             var conn = DataAccess.Instance();
-            conn.ConnectToDatabase();
 
             foreach (Orders ord in orderList)
             {
+                conn.ConnectToDatabase();
+
                 //Create Query string
                 string query = @"INSERT INTO Orders(OrderID, CustomerID, ProductID, BranchID, OrderDate, sPrice, Status, ItemQuantity) VALUES 
                                     (@OrderID, @CustomerID, @ProductID, @BranchID, @OrderDate, @sPrice, @Status, @ItemQuantity); ";
@@ -328,7 +329,7 @@ namespace SPWally.DataLayer
                 var command = new MySqlCommand(query, conn.Connection);
 
                 //Add variabled values
-                command.Parameters.AddWithValue("@OrderID", ord.OrderID);
+                command.Parameters.AddWithValue("@OrderID", (CountOrders() + 1));
                 command.Parameters.AddWithValue("@CustomerID", ord.Customer.CustomerID);
                 command.Parameters.AddWithValue("@ProductID", ord.Product.productId);
                 command.Parameters.AddWithValue("@BranchID", ord.Branch.BranchID);
@@ -344,13 +345,11 @@ namespace SPWally.DataLayer
                     return false;
                 }
 
-                command.CommandText = @"UPDATE Products P
-                                                INNER JOIN
-                                            branchLine bl ON bl.ProductID = P.ProductID 
+                command.CommandText = @"UPDATE Products
                                         SET 
-                                            P.Stock = @NewStock
+                                            Stock = @NewStock
                                         WHERE
-                                            bl.BranchID = @BranchID AND P.ProductID = @ProductID; ";
+                                            ProductID = @PproductID; ";
 
                 if (ord.Status == "PAID")
                 {
@@ -360,8 +359,7 @@ namespace SPWally.DataLayer
                 {
                     command.Parameters.AddWithValue("@NewStock", (ord.Product.Stock + ord.Quantity));
                 }
-                command.Parameters.AddWithValue("@BranchID", ord.Branch.BranchID);
-                command.Parameters.AddWithValue("@ProductID", ord.Product.productId);
+                command.Parameters.AddWithValue("@PproductID", ord.Product.productId);
 
                 //Check if the command executed Properly
                 if (0 == command.ExecuteNonQuery())
@@ -369,12 +367,44 @@ namespace SPWally.DataLayer
                     conn.CloseConnection();
                     return false;
                 }
+
+                conn.CloseConnection();
             }
 
             //Close connection and return true execution completes without problems
-            conn.CloseConnection();
             return true;
         }
+
+        public int CountOrders()
+        {
+            //Return variable
+            int retCode = -1;
+            //Connect to Database
+            var conn = DataAccess.Instance();
+            conn.ConnectToDatabase();
+
+            //Create Query String
+            string query = @"SELECT COUNT(*) FROM Orders; ";
+
+            //Create command
+            var command = new MySqlCommand(query, conn.Connection);
+
+            //Execute Reader and read the result
+            MySqlDataReader reader;
+            using (reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    retCode = reader.GetInt32(0);
+                }
+            }
+
+            //Close connection and return the count
+            conn.CloseConnection();
+            return retCode;
+        }
+
+
 
     }
 }

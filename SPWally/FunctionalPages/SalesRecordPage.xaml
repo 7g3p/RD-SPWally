@@ -22,27 +22,21 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="50" TextWrapping="Wrap">
-            Thank you for shopping at Wally's World Sports World On Sept. 20, 2019, Sean Clarke!
-        </TextBlock>
+        <TextBlock Name="TopThanksText" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="50" TextWrapping="Wrap"/>
 
-        <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" TextWrapping="Wrap" Text="Order ID: 5001"/>
+        <TextBlock Name="OrderID" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" TextWrapping="Wrap" Text="Order ID: 5001"/>
 
-        <ListView Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="15">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text ="" Margin="5"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+        <ListView Name="OrderList" Width="250" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="15">
+            <ListViewItem>
+                <TextBlock Margin="5" Width="225"/>
+            </ListViewItem>
         </ListView>
 
-        <TextBlock Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" TextWrapping="Wrap" FontWeight="Bold" Text="Subtotal = $74.65"/>
-        <TextBlock Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" TextWrapping="Wrap" FontWeight="Bold" Text="HST(13%) = $9.70"/>
-        <TextBlock Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" TextWrapping="Wrap" FontWeight="Bold" Text="Sale Total = $84.35"/>
+        <TextBlock Name="Subtotal" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" TextWrapping="Wrap" FontWeight="Bold" Text="Subtotal = $74.65"/>
+        <TextBlock Name="HST" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" TextWrapping="Wrap" FontWeight="Bold" Text="HST(13%) = $9.70"/>
+        <TextBlock Name="SaleTotal" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" TextWrapping="Wrap" FontWeight="Bold" Text="Sale Total = $84.35"/>
 
-        <TextBlock Grid.Row="8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="200" TextWrapping="Wrap" FontWeight="Bold" TextDecorations="Underline" Text="PAID - Thanks you!"/>
+        <TextBlock Name="BottomThanksText" Grid.Row="8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="200" TextWrapping="Wrap" FontWeight="Bold" TextDecorations="Underline" Text="PAID - Thanks you!"/>
         <Button Grid.Row="9" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="20" Content="Return" Click="Return_Click" />
     </Grid>
 </Page>

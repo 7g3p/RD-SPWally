@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SPWally.DataLayer;
 
 namespace SPWally.FunctionalPages
 {
@@ -20,13 +21,38 @@ namespace SPWally.FunctionalPages
     /// </summary>
     public partial class SalesRecordPage : Page
     {
+        private ViewModelValueOriented vmvo;
         public SalesRecordPage()
         {
             InitializeComponent();
+            Loaded += SalesRecordPage_Loaded;
+        }
+
+        private void SalesRecordPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            vmvo = new ViewModelValueOriented();
+            double subtot = 0.0;
+
+            TopThanksText.Text = "Thank you for shopping at Wally's World " + vmvo.CurrentBranch.BranchName + " On " + vmvo.OrderList[0].OrderDate.ToString("dddd, dd MMMM yyyy") + ", " + vmvo.CurrentCustomer.FullName + "!";
+            OrderID.Text = "OrderID: " + vmvo.OrderList[0].OrderID;
+
+            foreach (Orders ord in vmvo.OrderList)
+            {
+                OrderList.Items.Add("" + ord.Product.ProductName + " " + ord.Quantity + "x" + ord.SalesPrice + " = $" + (ord.Quantity * ord.SalesPrice));
+                subtot += (ord.Quantity * ord.SalesPrice);
+            }
+
+            Subtotal.Text = "Subtotal = $" + subtot;
+            HST.Text = string.Format("HST (13%) = ${0:0.00}", (subtot * 0.13));
+            SaleTotal.Text = string.Format("Sale Total = ${0:0.00}", (subtot + (subtot * 0.13)));
+
+            BottomThanksText.Text = "" + vmvo.OrderList[0].Status + " ー Thank You!";
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
+            vmvo.OrderList.Clear();
+
             // Find the frame.
             Frame frame = null;
             DependencyObject parent = VisualTreeHelper.GetParent(this);

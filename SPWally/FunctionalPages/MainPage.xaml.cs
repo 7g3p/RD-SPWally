@@ -14,9 +14,28 @@ namespace SPWally.FunctionalPages
     /// </summary>
     public partial class MainPage : Page
     {
+        private ViewModelValueOriented vmvo;
         public MainPage()
         {
             InitializeComponent();
+            Loaded += MainPage_Loaded;
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            //Variable
+            vmvo = new ViewModelValueOriented();
+
+            //Clear all data in static variables from the previous use
+            vmvo.CurrentBranch = new DataLayer.Branches();
+            vmvo.CurrentCustomer = new DataLayer.Customers();
+            vmvo.FirstName = "";
+            vmvo.LastName = "";
+            vmvo.Order = new DataLayer.Orders();
+            vmvo.OrderIDSearch = 0;
+            vmvo.Phone = 0;
+            vmvo.ProductQuantity = 0;
+            vmvo.SelectedProduct = new DataLayer.Products();
         }
 
         private void ExistingCustomer_Click(object sender, RoutedEventArgs e)

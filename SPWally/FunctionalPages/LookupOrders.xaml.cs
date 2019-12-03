@@ -26,23 +26,31 @@ namespace SPWally.FunctionalPages
 
         private void Refund_Click(object sender, RoutedEventArgs e)
         {
-            // Find the frame.
-            Frame frame = null;
-            DependencyObject parent = VisualTreeHelper.GetParent(this);
 
-            // Cycles through to MainWindow frame
-            while (parent != null && frame == null)
+            if (vmvo.Order.Status == "PAID")
             {
-                frame = parent as Frame;
-                parent = VisualTreeHelper.GetParent(parent);
-            }
+                // Find the frame.
+                Frame frame = null;
+                DependencyObject parent = VisualTreeHelper.GetParent(this);
 
-            // Change the page of the frame.
-            if (frame != null)
-            {
-                frame.Navigate(new RefundOrder());
+                // Cycles through to MainWindow frame
+                while (parent != null && frame == null)
+                {
+                    frame = parent as Frame;
+                    parent = VisualTreeHelper.GetParent(parent);
+                }
+
+                // Change the page of the frame.
+                if (frame != null)
+                {
+                    frame.Navigate(new RefundOrder());
+                }
+                //Code Courtesy of Shmuel Zang in codeprojects.com https://www.codeproject.com/Questions/281551/frame-navigation-in-WPF
             }
-            //Code Courtesy of Shmuel Zang in codeprojects.com https://www.codeproject.com/Questions/281551/frame-navigation-in-WPF
+            else
+            {
+                MessageBox.Show("You Cannot Refund a Refunded Order", "Alert!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
 
         private void Find_Click(object sender, RoutedEventArgs e)

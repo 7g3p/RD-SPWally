@@ -68,8 +68,8 @@ namespace SPWally
             }
         }
 
-        private static string _OrderIDSearch;
-        public string OrderIDSearch
+        private static int _OrderIDSearch;
+        public int OrderIDSearch
         {
             get { return _OrderIDSearch; }
             set
@@ -77,7 +77,8 @@ namespace SPWally
                 if (_OrderIDSearch != value)
                 {
                     _OrderIDSearch = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("OrderIDSearch");
+                    OnNewOrderID();
                 }
             }
         }
@@ -153,13 +154,13 @@ namespace SPWally
             }
         }
 
-        private List<Orders> _OrderList;
+        private static List<Orders> _OrderList;
         public List<Orders> OrderList
         {
             get { return _OrderList; }
             set
             {
-                _OrderList = value;
+                _OrderList.AddRange(value);
             }
         }
 
@@ -174,6 +175,15 @@ namespace SPWally
             if (_CurrentCustomer == null)
                 _CurrentCustomer = new Customers();
 
+            if (_OrderList == null)
+                _OrderList = new List<Orders>();
+
+        }
+
+        public event EventHandler NewOrderID;
+        private void OnNewOrderID()
+        {
+            NewOrderID?.Invoke(this, new EventArgs());
         }
 
         public event EventHandler CurrentBranchSelected;
