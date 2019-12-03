@@ -48,13 +48,6 @@ namespace SPWally.FunctionalPages
             {
                 MessageBox.Show("Could Not Load Branches", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            //vmvo.CurrentBranch = new Branches { BranchID = 2, BranchName = "Sports World" };
-
-            //if (dataMani.GetAllProductsInBranch() == false)
-            //{
-            //    MessageBox.Show("Could Not Find Any Products For The Selected Branch", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
         }
 
         private void OnBranchSelected(object sender, EventArgs e)

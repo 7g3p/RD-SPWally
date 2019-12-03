@@ -20,23 +20,20 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Text="View Inventory Levels"/>
-        
-        <ListView Grid.Row="1" Grid.Column="0" Margin="15">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text ="" Margin="5"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        
-        <DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="15" x:Name="Products" AlternatingRowBackground="LightGray" CanUserAddRows="False" AutoGenerateColumns="False">
+
+        <DataGrid Grid.Row="1" Grid.Column="0" Margin="15" AlternatingRowBackground="LightGray" SelectedItem="{Binding Path=CurrentBranch, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" AutoGenerateColumns="False" x:Name="BranchList" ItemsSource="{Binding Path=BranchList, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product ID" />
-                <DataGridTextColumn CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product Name" />
-                <DataGridTextColumn CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Wholesale Price" />
-                <DataGridTextColumn CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Stock" />
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Branch ID" Binding="{Binding Path=BranchID, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Branch Name" Binding="{Binding Path=BranchName, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Margin="15" AlternatingRowBackground="LightGray" CanUserAddRows="False" CanUserResizeRows="False" AutoGenerateColumns="False" SelectedItem="{Binding Path=SelectedProduct, UpdateSourceTrigger=PropertyChanged}" x:Name="ProductList" ItemsSource="{Binding Path=ProductList, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product ID" Binding="{Binding Path=productId, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product Name" Binding="{Binding Path=ProductName, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Wholesale Price" Binding="{Binding Path=wPrice, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product Stock" Binding="{Binding Path=Stock, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
         </DataGrid>
 

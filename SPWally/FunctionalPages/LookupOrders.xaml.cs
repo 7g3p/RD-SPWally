@@ -11,6 +11,7 @@ namespace SPWally.FunctionalPages
     /// </summary>
     public partial class LookupOrders : Page
     {
+        private ViewModelValueOriented vmvo;
         public LookupOrders()
         {
             InitializeComponent();
@@ -19,7 +20,8 @@ namespace SPWally.FunctionalPages
 
         private void LookupOrders_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = new ViewModelValueOriented();
+            vmvo = new ViewModelValueOriented();
+            DataContext = vmvo;
         }
 
         private void Refund_Click(object sender, RoutedEventArgs e)
