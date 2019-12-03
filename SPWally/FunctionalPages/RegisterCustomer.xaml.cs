@@ -21,6 +21,7 @@ namespace SPWally.FunctionalPages
     /// </summary>
     public partial class RegisterCustomer : Page
     {
+        private ViewModelValueOriented vmvo;
         public RegisterCustomer()
         {
             InitializeComponent();
@@ -29,17 +30,24 @@ namespace SPWally.FunctionalPages
 
         private void RegisterCustomer_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = new ViewModelValueOriented();
+            vmvo = new ViewModelValueOriented();
+            DataContext = vmvo;
         }
 
         private void ConfirmCust_Click(object sender, RoutedEventArgs e)
         {
             DatabaseManipulation dataMani = new DatabaseManipulation();
+            int custID;
 
-            if (dataMani.FindCustomer() == false)
+            if ((custID = dataMani.FindCustomer()) == -1)
             {
-                if (dataMani.AddCustomer() == true)
+                if ((custID = dataMani.AddCustomer()) != -1)
                 {
+                    vmvo.CurrentCustomer.CustomerID = custID;
+                    vmvo.CurrentCustomer.FirstName = vmvo.FirstName;
+                    vmvo.CurrentCustomer.LastName = vmvo.LastName;
+                    vmvo.CurrentCustomer.Phone = vmvo.Phone;
+
                     // Find the frame.
                     Frame frame = null;
                     DependencyObject parent = VisualTreeHelper.GetParent(this);

@@ -12,7 +12,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -26,21 +27,22 @@
                 <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Branch Name" Binding="{Binding Path=BranchName, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="15" AlternatingRowBackground="LightGray" CanUserAddRows="False" AutoGenerateColumns="False" x:Name="ProductList" ItemsSource="{Binding Path=ProductList, UpdateSourceTrigger=PropertyChanged}">
+        <DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Margin="15" AlternatingRowBackground="LightGray" CanUserAddRows="False" CanUserResizeRows="False" AutoGenerateColumns="False" SelectedItem="{Binding Path=SelectedProduct, UpdateSourceTrigger=PropertyChanged}" x:Name="ProductList" ItemsSource="{Binding Path=ProductList, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product ID" Binding="{Binding Path=ProductID, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product Name" Binding="{Binding Path=ProductName, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product ID" Binding="{Binding Path=productId, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product Name" Binding="{Binding Path=ProductName, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product Stock" Binding="{Binding Path=Stock, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
         </DataGrid>
-        <!--<DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="15" AlternatingRowBackground="LightGray" CanUserAddRows="False" CanUserResizeRows="False" AutoGenerateColumns="False" x:Name="ProductList" ItemsSource="{Binding Path=ProductList, UpdateSourceTrigger=PropertyChanged}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product ID" Binding="{Binding Path=ProductID, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" IsReadOnly="True" Header="Product Name" Binding="{Binding Path=ProductName, UpdateSourceTrigger=PropertyChanged}" />
-                --><!--<DataGridCheckBoxColumn Width="*" CanUserReorder="False" CanUserResize="False" Header="Add To Order" />--><!--
-                <DataGridTextColumn Width="*" CanUserReorder="False" CanUserResize="False" Header="Quantity" Binding="{Binding Path=Stock, UpdateSourceTrigger=PropertyChanged}"/>
-            </DataGrid.Columns>
-        </DataGrid>-->
-        <Button Grid.Row="2" Grid.Column="0" Width="80" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" x:Name="PlaceOrder" Content="Confirm Order" Click="ConfirmPurchase_Click" />
-        <Button Grid.Row="2" Grid.Column="0" Width="80" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" x:Name="CancelOrder" Content="Cancel" Click="Cancel_Click" />
+        <TextBlock Grid.Row="2" Grid.Column="0" Width="50" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,8,0,0" Text="Product:"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Width="50" Height="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="25,0,0,8" Text="Quantity:"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Width="175" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,8,0,0" Text="{Binding Path=SelectedProduct.ProductName, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Row="2" Grid.Column="0" Width="175" Height="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="90,0,0,8" Text="{Binding Path=ProductQuantity, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Button Grid.Row="2" Grid.Column="0" Width="85" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0" Content="Add To Order" Click="AddToOrder_Click"/>
+
+        <Button Grid.Row="3" Grid.Column="0" Width="80" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" x:Name="PlaceOrder" Content="Confirm Order" Click="ConfirmPurchase_Click" />
+        <Button Grid.Row="3" Grid.Column="0" Width="80" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0" x:Name="CancelOrder" Content="Cancel" Click="Cancel_Click" />
     </Grid>
 </Page>

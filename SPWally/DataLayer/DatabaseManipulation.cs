@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using SPWally.BusinessLayer;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Runtime.CompilerServices;
+using System.ComponentModel;
 
 namespace SPWally.DataLayer
 {
@@ -16,7 +18,7 @@ namespace SPWally.DataLayer
             boundData = new ViewModelValueOriented();
         }
 
-        public bool FindCustomer()
+        public int FindCustomer()
         {
             //Variables
             int dbIDReturned = -1;
@@ -52,7 +54,7 @@ namespace SPWally.DataLayer
                 if (reader.HasRows == false)
                 {
                     conn.CloseConnection();
-                    return false;
+                    return dbIDReturned;
                 }
 
                 //Read Data into variables
@@ -66,13 +68,14 @@ namespace SPWally.DataLayer
 
                 //Close connection and return true execution completes without problems
                 conn.CloseConnection();
-                return true;
+                return dbIDReturned;
             }
         }
 
-        public bool AddCustomer()
+        public int AddCustomer()
         {
             //Get Database Connection
+            int custID = (CountCustomers() + 1);
             var conn = DataAccess.Instance();
             conn.ConnectToDatabase();
 
@@ -84,7 +87,7 @@ namespace SPWally.DataLayer
             var command = new MySqlCommand(query, conn.Connection);
 
             //Add variabled values
-            command.Parameters.AddWithValue("@CustomerID", (CountCustomers() + 1));
+            command.Parameters.AddWithValue("@CustomerID", custID);
             command.Parameters.AddWithValue("@FirstName", boundData.FirstName);
             command.Parameters.AddWithValue("@LastName", boundData.LastName);
             command.Parameters.AddWithValue("@Phone", boundData.Phone);
@@ -93,12 +96,12 @@ namespace SPWally.DataLayer
             if(0 == command.ExecuteNonQuery())
             {
                 conn.CloseConnection();
-                return false;
+                return -1;
             }
 
             //Close connection and return true execution completes without problems
             conn.CloseConnection();
-            return true;
+            return custID;
         }
 
         public int CountCustomers()

@@ -21,6 +21,7 @@ namespace SPWally.FunctionalPages
     /// </summary>
     public partial class ExistingCustomer : Page
     {
+        private ViewModelValueOriented vmvo;
         public ExistingCustomer()
         {
             InitializeComponent();
@@ -29,15 +30,23 @@ namespace SPWally.FunctionalPages
 
         private void ExistingCustomer_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = new ViewModelValueOriented();
+            vmvo = new ViewModelValueOriented();
+            DataContext = vmvo;
         }
 
         private void Purchase_Click(object sender, RoutedEventArgs e)
         {
-            //var dbMani = new DatabaseManipulation();
+            var dbMani = new DatabaseManipulation();
+            int custID;
 
-            //if (dbMani.FindCustomer())
-            //{
+            if (-1 != (custID = dbMani.FindCustomer()))
+            {
+                vmvo.CurrentCustomer.CustomerID = custID;
+                vmvo.CurrentCustomer.FirstName = vmvo.FirstName;
+                vmvo.CurrentCustomer.LastName = vmvo.LastName;
+                vmvo.CurrentCustomer.Phone = vmvo.Phone;
+
+
                 // Find the frame.
                 Frame frame = null;
                 DependencyObject parent = VisualTreeHelper.GetParent(this);
@@ -55,19 +64,25 @@ namespace SPWally.FunctionalPages
                     frame.Navigate(new PurchaseOrder());
                 }
                 //Code Courtesy of Shmuel Zang in codeprojects.com https://www.codeproject.com/Questions/281551/frame-navigation-in-WPF
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Could Not Find Specific Customer.", "Alert!", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
+            }
+            else
+            {
+                MessageBox.Show("Could Not Find Specific Customer.", "Alert!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Refund_Click(object sender, RoutedEventArgs e)
         {
             var dbMani = new DatabaseManipulation();
+            int custID;
 
-            if (dbMani.FindCustomer())
+            if (-1 != (custID = dbMani.FindCustomer()))
             {
+                vmvo.CurrentCustomer.CustomerID = custID;
+                vmvo.CurrentCustomer.FirstName = vmvo.FirstName;
+                vmvo.CurrentCustomer.LastName = vmvo.LastName;
+                vmvo.CurrentCustomer.Phone = vmvo.Phone;
+
                 // Find the frame.
                 Frame frame = null;
                 DependencyObject parent = VisualTreeHelper.GetParent(this);

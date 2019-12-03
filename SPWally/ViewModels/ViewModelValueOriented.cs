@@ -40,8 +40,8 @@ namespace SPWally
             }
         }
 
-        private static string _Phone;
-        public string Phone
+        private static long _Phone;
+        public long Phone
         {
             get { return _Phone; }
 
@@ -102,7 +102,7 @@ namespace SPWally
                 {
                     _CurrentBranch = value;
                     OnPropertyChanged();
-                    //OnCurrentBranchSelected();
+                    OnCurrentBranchSelected();
                 }
             }
         }
@@ -115,6 +115,40 @@ namespace SPWally
             {
                 _Products = value;
                 OnPropertyChanged();
+                _Products.CollectionChanged += _Products_CollectionChanged;
+            }
+        }
+
+        private static int _ProductQuantity;
+        public int ProductQuantity
+        {
+            get { return _ProductQuantity; }
+            set
+            {
+                _ProductQuantity = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private static Products _SelectedProduct;
+        public Products SelectedProduct
+        {
+            get { return _SelectedProduct; }
+            set
+            {
+                _SelectedProduct = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private static Customers _CurrentCustomer;
+        public Customers CurrentCustomer
+        {
+            get { return _CurrentCustomer; }
+            set
+            {
+                _CurrentCustomer = value;
+                OnPropertyChanged();
             }
         }
 
@@ -122,6 +156,12 @@ namespace SPWally
         {
             if (_Order == null)
                 Order = new Orders();
+
+            if (_SelectedProduct == null)
+                _SelectedProduct = new Products();
+
+            if (_CurrentCustomer == null)
+                _CurrentCustomer = new Customers();
 
         }
 
@@ -132,12 +172,17 @@ namespace SPWally
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void SubscribeToPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged();
+        }
+
+        private void _Products_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged();
         }
