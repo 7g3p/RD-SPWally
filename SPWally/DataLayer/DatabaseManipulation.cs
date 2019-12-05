@@ -10,14 +10,39 @@ using System.ComponentModel;
 
 namespace SPWally.DataLayer
 {
+    /*
+    * NAME : DatabaseManipulation
+    * PURPOSE : The DatabaseManipulation class is meant to hold all the sql commands needed for the program
+    */
     class DatabaseManipulation
     {
+        //Variables
         private ViewModelValueOriented boundData;
+
+        /*
+        * FUNCTION : DatabaseManipulation
+        * DESCRIPTION :
+        *           This is the constructor for the class
+        * PARAMETERS :
+        *       N/A
+        * RETURNS :
+        *       N/A
+        */
         public DatabaseManipulation()
         {
+            //Sets the private data member to equal the ViewModel
             boundData = new ViewModelValueOriented();
         }
 
+        /*
+        * FUNCTION : FindCustomer
+        * DESCRIPTION :
+        *           This function finds the customer in the database and informs of success or failure
+        * PARAMETERS :
+        *       N/A
+        * RETURNS :
+        *       int : returns the customerID of the found customer
+        */
         public int FindCustomer()
         {
             //Variables
@@ -72,6 +97,15 @@ namespace SPWally.DataLayer
             }
         }
 
+        /*
+        * FUNCTION : AddCustomer
+        * DESCRIPTION :
+        *           This function Adds the customer to the database and informs of success or failure
+        * PARAMETERS :
+        *       N/A
+        * RETURNS :
+        *       int : returns the customerID of the added customer
+        */
         public int AddCustomer()
         {
             //Get Database Connection
@@ -104,6 +138,15 @@ namespace SPWally.DataLayer
             return custID;
         }
 
+        /*
+        * FUNCTION : CountCustomers
+        * DESCRIPTION :
+        *           This function counts the customer number of customers in the database and informs and returns that count
+        * PARAMETERS :
+        *       N/A
+        * RETURNS :
+        *       int : returns the number of customers in the database
+        */
         public int CountCustomers()
         {
             //Return variable
@@ -133,6 +176,15 @@ namespace SPWally.DataLayer
             return retCode;
         }
 
+        /*
+        * FUNCTION : LoadOrder
+        * DESCRIPTION :
+        *           This function loads the order from the database based on the OrderID
+        * PARAMETERS :
+        *       N/A
+        * RETURNS :
+        *       bool : returns a success(true) or failure(false)
+        */
         public bool LoadOrder()
         {
             //Get Database Connection
@@ -197,6 +249,15 @@ namespace SPWally.DataLayer
             }
         }
 
+        /*
+        * FUNCTION : GetAllBranches
+        * DESCRIPTION :
+        *           This function loads the all the branches from the database
+        * PARAMETERS :
+        *       N/A
+        * RETURNS :
+        *       bool : returns a success(true) or failure(false)
+        */
         public bool GetAllBranches()
         {
             //Variable
@@ -249,6 +310,15 @@ namespace SPWally.DataLayer
             }
         }
 
+        /*
+        * FUNCTION : GetAllProductsInBranch
+        * DESCRIPTION :
+        *           This function loads the all the products from the database based on the branchID
+        * PARAMETERS :
+        *       N/A
+        * RETURNS :
+        *       bool : returns a success(true) or failure(false)
+        */
         public bool GetAllProductsInBranch()
         {
             //Variable
@@ -311,6 +381,15 @@ namespace SPWally.DataLayer
             }
         }
 
+        /*
+        * FUNCTION : AddOrdersFromList
+        * DESCRIPTION :
+        *           This function adds all the orders from the order list to the database
+        * PARAMETERS :
+        *       N/A
+        * RETURNS :
+        *       bool : returns a success(true) or failure(false)
+        */
         public bool AddOrdersFromList()
         {
             //Get Database Connection
@@ -345,12 +424,14 @@ namespace SPWally.DataLayer
                     return false;
                 }
 
+                //Command to update the stocks according to the orders
                 command.CommandText = @"UPDATE Products
                                         SET 
                                             Stock = @NewStock
                                         WHERE
                                             ProductID = @PproductID; ";
 
+                //Check if the order is a purchase or refund
                 if (ord.Status == "PAID")
                 {
                     command.Parameters.AddWithValue("@NewStock", (ord.Product.Stock - ord.Quantity));
@@ -375,6 +456,15 @@ namespace SPWally.DataLayer
             return true;
         }
 
+        /*
+        * FUNCTION : CountOrders
+        * DESCRIPTION :
+        *           This function counts all the orders in the database
+        * PARAMETERS :
+        *       N/A
+        * RETURNS :
+        *       int : returns the total number of orders in the database
+        */
         public int CountOrders()
         {
             //Return variable

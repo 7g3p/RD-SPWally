@@ -8,6 +8,10 @@ using System.ComponentModel;
 
 namespace SPWally.DataLayer
 {
+    /*
+    * NAME : Customers : INotifyPropertyChanged
+    * PURPOSE : The Customers class is meant to hold all the data taken from the database that corresponds to the Customers
+    */
     class Customers : INotifyPropertyChanged
     {
         private int _CustomerID;

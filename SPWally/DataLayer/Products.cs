@@ -9,6 +9,10 @@ using System.Text.RegularExpressions;
 
 namespace SPWally.DataLayer
 {
+    /*
+    * NAME : Products : INotifyPropertyChanged
+    * PURPOSE : The Products class is meant to hold all the data taken from the database that corresponds to the Products
+    */
     class Products : INotifyPropertyChanged
     {
         private int _ProductID;

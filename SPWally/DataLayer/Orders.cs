@@ -9,6 +9,10 @@ using System.ComponentModel;
 
 namespace SPWally.DataLayer
 {
+    /*
+    * NAME : Orders : INotifyPropertyChanged
+    * PURPOSE : The Orders class is meant to hold all the data taken from the database that corresponds to the Orders
+    */
     class Orders : INotifyPropertyChanged
     {
         // Data members

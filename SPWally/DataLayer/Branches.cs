@@ -9,6 +9,10 @@ using System.Text.RegularExpressions;
 
 namespace SPWally.DataLayer
 {
+    /*
+    * NAME : Branches : INotifyPropertyChanged
+    * PURPOSE : The Branches class is meant to hold all the data taken from the database that corresponds to the branches
+    */
     class Branches : INotifyPropertyChanged
     {
         private int _BranchID;
